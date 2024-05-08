@@ -1,0 +1,122 @@
+{
+  "name": "web-client",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/web-client/src",
+  "targets": {
+    "build": {
+      "executor": "@analogjs/platform:vite",
+      "outputs": [
+        "{options.outputPath}",
+        "{workspaceRoot}/dist/apps/web-client/.nitro",
+        "{workspaceRoot}/dist/apps/web-client/ssr",
+        "{workspaceRoot}/dist/apps/web-client/analog"
+      ],
+      "options": {
+        "main": "apps/web-client/src/main.ts",
+        "configFile": "apps/web-client/vite.config.ts",
+        "outputPath": "dist/apps/web-client/client",
+        "tsConfig": "apps/web-client/tsconfig.app.json"
+      },
+      "defaultConfiguration": "production",
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "sourcemap": false,
+          "mode": "production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@analogjs/platform:vite-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "web-client:build",
+        "port": 4200,
+        "open": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "web-client:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "web-client:build:production"
+        }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "web-client:build"
+      }
+    },
+    "test": {
+      "executor": "@analogjs/platform:vitest",
+      "outputs": ["{projectRoot}/coverage"]
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "web-client:build",
+        "staticFilePath": "dist/apps/web-client/browser"
+      }
+    },
+    "start-local-db": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node {projectRoot}/scripts/startLocalDb.js"
+      }
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 5200,
+        "configDir": "apps/web-client/.storybook",
+        "browserTarget": "web-client:build",
+        "compodoc": false,
+        "styles": ["apps/web-client/src/styles.css"]
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/web-client",
+        "configDir": "apps/web-client/.storybook",
+        "browserTarget": "web-client:build",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c apps/web-client/.storybook --url=http://localhost:4400"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "web-client:build-storybook",
+        "staticFilePath": "dist/storybook/web-client"
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "web-client:build-storybook:ci"
+        }
+      }
+    }
+  }
+}
