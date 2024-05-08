@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2022",
-    "baseUrl": "src",
-    "useDefineForClassFields": false,
-    "esModuleInterop": true,
+    "target": "es2020",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -13,6 +10,7 @@
   },
   "files": [],
   "include": [],
+  "exclude": [],
   "references": [
     {
       "path": "./tsconfig.app.json"
