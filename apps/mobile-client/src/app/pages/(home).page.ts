@@ -8,6 +8,10 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TodoItemComponent } from '../components/todo-item/todo-item.component';
+import { add } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
+
+addIcons({ add });
 
 @Component({
   selector: 'app-home-page',
