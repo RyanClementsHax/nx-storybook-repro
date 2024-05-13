@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { IonRefresherCustomEvent, RefresherEventDetail } from '@ionic/core';
 import { Todo, TodosService } from '../../app/services/todos.service';
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
@@ -62,6 +62,7 @@ export default class HomeComponent implements OnInit {
   constructor(
     private todosService: TodosService,
     private modalCtrl: ModalController,
+    private cdf: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -69,9 +70,10 @@ export default class HomeComponent implements OnInit {
   }
 
   loadTodos(): void {
-    this.todosService
-      .getAllTodos()
-      .subscribe((todos) => this.todos$.next(todos));
+    this.todosService.getAllTodos().subscribe((todos) => {
+      this.todos$.next(todos);
+      this.cdf.detectChanges();
+    });
   }
 
   removeTodo(todo: Todo): void {
