@@ -162,7 +162,7 @@
         "configDir": "apps/mobile-client/.storybook",
         "browserTarget": "mobile-client:build",
         "compodoc": false,
-        "styles": ["apps/mobile-client/src/styles.css"]
+        "styles": ["apps/mobile-client/src/styles.scss"]
       },
       "configurations": {
         "ci": {
