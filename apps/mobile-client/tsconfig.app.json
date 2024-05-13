@@ -12,7 +12,10 @@
     "src/app/routes/**/*.ts",
     "src/app/pages/**/*.page.ts"
   ],
-  "exclude": ["**/*.test.ts", "**/*.spec.ts",
-  "**/*.stories.ts",
-  "**/*.stories.js"]
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/*.stories.ts",
+    "**/*.stories.js"
+  ]
 }

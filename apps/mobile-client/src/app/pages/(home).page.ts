@@ -56,7 +56,7 @@ import { TodoItemComponent } from '../components/todo-item/todo-item.component';
     </ion-content>
   `,
 })
-export class HomeComponent implements OnInit {
+export default class HomeComponent implements OnInit {
   todos$ = new BehaviorSubject<Todo[]>([]);
 
   constructor(

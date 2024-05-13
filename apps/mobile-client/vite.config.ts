@@ -12,8 +12,6 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: '../../dist/apps/mobile-client/client',
       reportCompressedSize: true,
-      // ?????
-      commonjsOptions: { transformMixedEsModules: true },
       target: ['es2020'],
     },
     server: {
@@ -27,9 +25,6 @@ export default defineConfig(({ mode }) => {
     plugins: [
       analog({
         ssr: false,
-        vite: {
-          inlineStylesExtension: 'scss',
-        },
       }),
       nxViteTsPaths(),
       splitVendorChunkPlugin(),

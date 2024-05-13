@@ -3,20 +3,9 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/mobile-client/src",
-  "tags": [],
   "targets": {
     "build": {
       "executor": "@analogjs/platform:vite",
-      "defaultConfiguration": "production",
-      "configurations": {
-        "development": {
-          "mode": "development"
-        },
-        "production": {
-          "sourcemap": false,
-          "mode": "production"
-        }
-      },
       "outputs": [
         "{options.outputPath}",
         "{workspaceRoot}/dist/apps/mobile-client/.nitro",
@@ -28,6 +17,16 @@
         "configFile": "apps/mobile-client/vite.config.ts",
         "outputPath": "dist/apps/mobile-client/client",
         "tsConfig": "apps/mobile-client/tsconfig.app.json"
+      },
+      "defaultConfiguration": "production",
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "sourcemap": false,
+          "mode": "production"
+        }
       }
     },
     "serve": {
@@ -35,8 +34,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "mobile-client:build",
-        "open": true,
-        "port": 4300
+        "port": 4300,
+        "open": true
       },
       "configurations": {
         "development": {
@@ -48,10 +47,24 @@
         }
       }
     },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "mobile-client:build"
+      }
+    },
     "test": {
       "executor": "@analogjs/platform:vitest",
       "outputs": ["{projectRoot}/coverage"]
     },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "mobile-client:build",
+        "staticFilePath": "dist/apps/mobile-client/browser"
+      }
+    },
+
     "cap": {
       "executor": "@nxext/capacitor:cap",
       "options": {
@@ -148,7 +161,8 @@
         "port": 5300,
         "configDir": "apps/mobile-client/.storybook",
         "browserTarget": "mobile-client:build",
-        "compodoc": false
+        "compodoc": false,
+        "styles": ["apps/mobile-client/src/styles.css"]
       },
       "configurations": {
         "ci": {
