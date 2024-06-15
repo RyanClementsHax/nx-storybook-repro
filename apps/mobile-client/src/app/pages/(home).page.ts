@@ -1,5 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { IonRefresherCustomEvent, RefresherEventDetail } from '@ionic/core';
+import type {
+  IonRefresherCustomEvent,
+  RefresherEventDetail,
+} from '@ionic/core/components';
 import { Todo, TodosService } from '../../app/services/todos.service';
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { ModalController } from '@ionic/angular';
