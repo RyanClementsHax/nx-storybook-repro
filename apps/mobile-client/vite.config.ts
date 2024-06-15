@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
   return {
     root: __dirname,
     publicDir: 'src/public',
+    cacheDir: '`../../node_modules/.vitest',
     build: {
       outDir: '../../dist/apps/mobile-client/client',
       reportCompressedSize: true,
@@ -18,9 +19,6 @@ export default defineConfig(({ mode }) => {
       fs: {
         allow: ['.'],
       },
-    },
-    ssr: {
-      noExternal: ['@ionic/**', '@stencil/**', 'ionicons'],
     },
     plugins: [
       analog({
@@ -38,9 +36,6 @@ export default defineConfig(({ mode }) => {
       setupFiles: ['src/test-setup.ts'],
       include: ['**/*.spec.ts'],
       reporters: ['default'],
-      cache: {
-        dir: `../../node_modules/.vitest`,
-      },
     },
     define: {
       'import.meta.vitest': mode !== 'production',
