@@ -15,6 +15,9 @@ export default defineConfig(({ mode }) => {
       reportCompressedSize: true,
       target: ['es2020'],
     },
+    ssr: {
+      noExternal: ['@ionic/**', '@stencil/**', 'ionicons'],
+    },
     server: {
       fs: {
         allow: ['.'],
@@ -36,6 +39,11 @@ export default defineConfig(({ mode }) => {
       setupFiles: ['src/test-setup.ts'],
       include: ['**/*.spec.ts'],
       reporters: ['default'],
+      server: {
+        deps: {
+          inline: ['@ionic/angular'],
+        },
+      },
     },
     define: {
       'import.meta.vitest': mode !== 'production',
