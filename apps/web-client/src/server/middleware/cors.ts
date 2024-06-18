@@ -1,6 +1,6 @@
 import { defineEventHandler, handleCors } from 'h3';
 
-const frontendUrls = import.meta.env.FRONTEND_URLS;
+const frontendUrls = 'testing';
 if (typeof frontendUrls !== 'string') {
   throw new Error('FRONTEND_URLS environment variable is not set');
 }
