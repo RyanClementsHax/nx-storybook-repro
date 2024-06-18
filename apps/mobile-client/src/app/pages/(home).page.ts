@@ -63,7 +63,7 @@ addIcons({ add });
     </ion-content>
   `,
 })
-export default class HomeComponent implements OnInit {
+export default class HomePageComponent implements OnInit {
   todos$ = new BehaviorSubject<Todo[]>([]);
 
   constructor(
